@@ -1,10 +1,10 @@
 
 
 
-const {XXHash32} = require('../index.js')
+const {Blake3} = require('../index.js')
 
 
-let hasher = new XXHash32(9347597)
+let hasher = new Blake3(9347597)
 
 let hash = hasher.hash("this is some junk data")
 console.log(hash)

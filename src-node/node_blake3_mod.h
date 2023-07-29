@@ -19,10 +19,6 @@
 #include <sstream>
 
 
-#ifndef _POSIX_THREAD_PROCESS_SHARED
-#warning This system does not support process shared mutex -- alternative method will be used
-#endif
-
 
 using namespace node;
 using namespace v8;
