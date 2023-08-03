@@ -1,0 +1,31 @@
+{
+  "name": "blake3-neon",
+  "version": "0.1.0",
+  "description": "Node package using neon to interface to blake3",
+  "main": "index.node",
+  "scripts": {
+    "build": "cargo-cp-artifact -nc index.node -- cargo build --message-format=json-render-diagnostics",
+    "build-debug": "npm run build --",
+    "build-release": "npm run build -- --release",
+    "install": "npm run build-release",
+    "test": "cargo test"
+  },
+  "author": "R. Leddy",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "cargo-cp-artifact": "^0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/copious-world/blake3-node-neon-no-package.git"
+  },
+  "keywords": [
+    "blake3",
+    "hash",
+    "neon"
+  ],
+  "bugs": {
+    "url": "https://github.com/copious-world/blake3-node-neon-no-package/issues"
+  },
+  "homepage": "https://github.com/copious-world/blake3-node-neon-no-package#readme"
+}

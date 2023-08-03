@@ -1,0 +1,17 @@
+[package]
+name = "blake3-wasm-nopackage"
+version = "0.1.0"
+authors = ["Richard Leddy <rleddy@copious.world>"]
+description = "A sample project with wasm-pack"
+license = "GPL-2.0-only"
+repository = "https://github.com/copious-world/copious-counters"
+edition = "2018"
+
+
+[lib]
+crate-type=["rlib", "cdylib"]
+
+[dependencies]
+blake3 = "1.4.1"
+
+

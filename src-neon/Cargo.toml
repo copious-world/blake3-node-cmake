@@ -5,7 +5,7 @@ authors = ["Richard Leddy <rleddy@copious.world>"]
 description = "basic node module interface using neon library"
 license = "GPL-2.0-only"
 repository = "https://github.com/copious-world/copious-counters"
-edition = "2023"
+edition = "2021"
 
 
 [lib]
@@ -13,6 +13,10 @@ crate-type=["rlib", "cdylib"]
 
 [dependencies]
 blake3 = "1.2.0"
-neon = "0.10.1"
+
+[dependencies.neon]
+version = "0.10.1"
+default-features = false
+features = ["napi-6"]
 
 
