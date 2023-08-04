@@ -1,1 +1,0 @@
-/Users/richardalbertleddy/Documents/GitHub/universal-content/blake3-node-neon-no-package/client/target/wasm32-unknown-unknown/release/blake3_wasm_nopackage.wasm: /Users/richardalbertleddy/Documents/GitHub/universal-content/blake3-node-neon-no-package/client/src/lib.rs

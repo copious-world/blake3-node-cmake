@@ -29,7 +29,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "blake3-wasm-neon"
+name = "blake3-neon"
 version = "0.1.0"
 dependencies = [
  "blake3",

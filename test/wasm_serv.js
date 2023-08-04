@@ -51,7 +51,7 @@ app.get('js/:file',(req, res) => {
 app.get('/wasm/:file_name',(req, res) => {
     let fname = req.params.file_name 
     try {
-        const stream = fs.createReadStream(`./target/wasm32-unknown-unknown/release/${fname}.wasm`)
+        const stream = fs.createReadStream(`../assets/${fname}.wasm`)
         send(res,200,stream,{ 'Content-Type': 'application/wasm' })
     } catch (e) {
         send(res,404,"what")

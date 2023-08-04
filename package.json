@@ -17,9 +17,6 @@
     "url": "https://github.com/copious-world"
   },
   "license": "MIT",
-  "engines": {
-    "node": ">=4.0.0"
-  },
   "bugs": {
     "url": "https://github.com/copious-world/blake3-node-neon-no-package/issues"
   },

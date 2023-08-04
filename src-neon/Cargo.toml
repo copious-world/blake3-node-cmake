@@ -1,22 +1,21 @@
 [package]
-name = "blake3-wasm-neon"
+name = "blake3-neon"
 version = "0.1.0"
-authors = ["Richard Leddy <rleddy@copious.world>"]
-description = "basic node module interface using neon library"
-license = "GPL-2.0-only"
-repository = "https://github.com/copious-world/copious-counters"
-edition = "2021"
-
+description = "Node package using neon to interface to blake3"
+authors = ["R. Leddy"]
+license = "GPL-3.0-or-later"
+edition = "2018"
+exclude = ["index.node"]
 
 [lib]
-crate-type=["rlib", "cdylib"]
+crate-type = ["cdylib"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-blake3 = "1.2.0"
+blake3 = "1.4.1"
 
 [dependencies.neon]
-version = "0.10.1"
+version = "0.10"
 default-features = false
 features = ["napi-6"]
-
-
