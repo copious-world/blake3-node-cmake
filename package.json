@@ -1,6 +1,6 @@
 {
   "name": "blake3-node-neon-no-package",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Exposing the blake3 library as a node module buildable with neon and WASM for the browser",
   "main": "index.js",
   "repository": {
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/copious-world/blake3-node-neon-no-package",
   "scripts": {
+    "preinstall": "./tools/pre_inst_build.sh",
     "test": "node test/example.js"
   },
   "devDependencies": {

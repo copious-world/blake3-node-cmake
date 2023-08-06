@@ -4,7 +4,7 @@
 const {Blake3} = require('../index.js')
 
 
-let hasher = new Blake3(9347597)
+let hasher = new Blake3()
 
 let hash = hasher.hash("this is some junk data")
 console.log(hash)
