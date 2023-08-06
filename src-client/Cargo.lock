@@ -33,6 +33,7 @@ name = "blake3-wasm-nopackage"
 version = "0.1.0"
 dependencies = [
  "blake3",
+ "wasm-nopackage",
 ]
 
 [[package]]
@@ -119,3 +120,9 @@ name = "version_check"
 version = "0.9.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
+
+[[package]]
+name = "wasm-nopackage"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "40fa7a1b4b2fe29b1d24215611ff7510b6b1c0795df2e3a1e742847135a9ab5d"

@@ -13,5 +13,6 @@ crate-type=["rlib", "cdylib"]
 
 [dependencies]
 blake3 = "1.4.1"
+wasm-nopackage = "0.1.5"
 
 

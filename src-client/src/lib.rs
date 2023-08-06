@@ -1,80 +1,34 @@
-use std::mem;
-use std::ffi::CString;
-//use std::ffi::CStr;
-use std::os::raw::{c_char};
+
 use blake3::hash;
+use wasm_nopackage::{go_live,set_plugin_name};
 
 
-
-
-
-#[no_mangle]
-pub extern "C" fn add(a: u32, b: u32) -> u32 {
-    a + b
-}
-
-/*
-const sum = result.instance.exports.add(1, 2);
-console.log(`1 + 2 = ${sum}`);
-*/
-
-
-
-/*
-cargo install blake3
-cargo build --target wasm32-unknown-unknown --release
-
-
-https://github.com/radu-matei/wasm-memory/blob/main/src/lib.rs
-https://depth-first.com/articles/2020/07/07/rust-and-webassembly-from-scratch-hello-world-with-strings/
-*/
-
-
-/// Allocate memory into the module's linear memory
-/// and return the offset to the start of the block.
-#[no_mangle]
-pub fn alloc(len: usize) -> *mut u8 {
-    // create a new mutable buffer with capacity `len`
-    let mut buf = Vec::with_capacity(len);
-    // take a mutable pointer to the buffer
-    let ptr = buf.as_mut_ptr();
-    // take ownership of the memory block and
-    // ensure the its destructor is not
-    // called when the object goes out of scope
-    // at the end of the function
-    mem::forget(buf);
-    // return the pointer so the runtime
-    // can write data at this offset
-    return ptr;
+#[link(wasm_import_module = "mod")]
+extern "C" {
+    fn message_js(s: *mut i8, size: usize);
 }
 
 
-/*
-#[no_mangle]
-pub unsafe extern "C" fn dealloc(ptr: *mut c_void) {
-    let _ = Vec::from_raw_parts(ptr, 0, 1024);
+fn output_string(s: *mut i8, size: usize) -> () {
+    unsafe {
+        message_js(s,size);
+    }
 }
-*/
 
-
-#[no_mangle]
-pub unsafe fn dealloc(ptr: *mut u8, size: usize) {
-    let data = Vec::from_raw_parts(ptr, size, size);
-    mem::drop(data);
+fn my_plugin_name() -> &'static str {
+    let my_str : &str = "Blake3 exposed";
+    return my_str;
 }
 
 
-
-
-/*
+///
+/// free memory taken up in linear memory.
+/// The original pointer offset will be found in ptr, and the size of the previously allocated block is required.
 #[no_mangle]
-pub unsafe extern "C" fn w_hash(in_ptr: *mut u8, out_ptr: *mut u8) {
-    let hasher = hash(in_ptr);
-    let bref : &[u8; 32] = hash_obj.as_bytes();
-    out_ptr[..bref.len()].copy_from_slice(bref);
+pub fn startup() {
+    go_live(output_string);
+    set_plugin_name(my_plugin_name);
 }
-
-*/
 
 
 
@@ -105,29 +59,5 @@ pub unsafe fn w_hash(ptr: *mut u8, len: usize) -> *mut u8 {
     ptr
 }
 
-
-
-
-/*
-/// The Node.js WASI runtime requires a `_start` function
-/// for instantiating the module.
-#[no_mangle]
-pub fn _start() {}
-*/
-
-
-
-static PLUGIN_NAME: &'static str = "Blake3 exposed";
-
-#[no_mangle]
-pub extern "C" fn plugin_name() -> *mut c_char {
-    let s = CString::new(PLUGIN_NAME).unwrap();
-    s.into_raw()
-}
-
-#[no_mangle]
-pub fn plugin_name_len() -> usize {
-    PLUGIN_NAME.len()
-}
 
 

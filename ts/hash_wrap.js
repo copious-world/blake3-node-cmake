@@ -9,10 +9,9 @@ class Hasher extends WASMInterface {
     }
 
     hash(str) {
-        const pointer =  this.alloc(str.length);
-        this.write(str, pointer)        // write does the encoding
+        const [pointer,size] = this.write(str)        // write does the encoding
         let hashresult = this.w_hash(pointer)
-        this.dealloc(pointer,str.length)
+        this.dealloc(pointer,size)
         return this.read_Uint8Array(hashresult)
     }
 

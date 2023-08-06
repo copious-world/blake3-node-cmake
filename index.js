@@ -1,27 +1,18 @@
 'use strict';
-const xxhash = require('./build/Release/xxhash-node-cmake.node');
+const blake3 = require('./src-neon/index.node');
 
 
 // For 32 bit hashes, we can have one module that passes parameters using Nan.
 // For larger data types, we can set up buffers. Another module can be used for the larger values.
 // So, this will skip 64 bit hashes. For instance xxhash3 might be a better target with ARM support.
 
-class CommonHash {
-    constructor(seed) {
-        if ( typeof seed !== "Number" ) {
-            this.seed = parseInt(seed)
-        } else {
-            this.seed = seed
-        }
-    }
-}
 
 
-/// --- XXHash32
-class XXHash32 extends CommonHash {
+/// --- Blake3
+class Blake3 extends CommonHash {
     //
-    constructor(seed) {
-       super(seed)
+    constructor() {
+        this.index = -1;
     }
 
     hash(data) {
@@ -32,15 +23,16 @@ class XXHash32 extends CommonHash {
                 data = data.toString()
             }
         }
-        let seed = this.seed
-        return xxhash.hash_once_32(data,seed)
+        return blake3.hash(data)
     }
 
     init_running_hash() {
-        this.index = xxhash.init(this.seed)
+        this.index = blake3.init()
     }
 
     update(data) {
+        if ( this.index < 0 ) return;
+        //
         if ( typeof data !== "string" ) {
             if ( typeof data === 'object' ) {
                 data = JSON.stringify(data)
@@ -48,30 +40,33 @@ class XXHash32 extends CommonHash {
                 data = data.toString()
             }
         }
-        xxhash.update(this.index,data)
+        blake3.update(this.index,data)
     }
 
     get_hash() {
-        return xxhash.get_hash(this.index)
+        if ( this.index < 0 ) return false;
+        return blake3.get_hash(this.index)
     }
 
     reset() {
-        if ( xxhash.reset(this.index,this.seed) ) {   // the seed goes back in to do initialization...
+        if ( ( this.index >= 0 ) && blake3.reset(this.index) ) {   // the seed goes back in to do initialization...
             return true
         } else {
-            this.index = 0;
+            this.index = -1;
             return false
         }
     }
     //
     remove() {
-        return xxhash.remove(this.index)
+        if ( this.index < 0 ) return false;
+        return blake3.remove(this.index)
     }
+
 }
 
 
 
-module.exports.XXHash32 = XXHash32
+module.exports.Blake3 = Blake3
 
 
 

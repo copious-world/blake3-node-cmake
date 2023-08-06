@@ -11,7 +11,7 @@ This implementation referes to the Rust crate for blake3.
 
 It may be desirable to use blake3 hashing in upstream modules, such as [crypto-wraps]() or [ucwid](). But, there is a desire to keep those modules fairly lean. The basic version of those modules do not have dependencies outside of their execution contexts. Node.js provides **crypto.subtle** and so does the browser. But, **crypto.subtle** does not included some of the newer hashes and ciphers.
 
-Some of the JavaScript packages for including these newer hashes and ciphers use extenive packaing libraries. That too, and they are not necessarily being maintained.
+Some of the JavaScript packages for including these newer hashes and ciphers use extensive packaging libraries. That too, and they are not necessarily being maintained.
 
 
 ## Install
