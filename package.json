@@ -1,6 +1,6 @@
 {
   "name": "blake3-node-neon-no-package",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Exposing the blake3 library as a node module buildable with neon and WASM for the browser",
   "main": "index.js",
   "repository": {
@@ -23,17 +23,9 @@
   "homepage": "https://github.com/copious-world/blake3-node-neon-no-package",
   "scripts": {
     "preinstall": "./tools/pre_inst_build.sh",
-    "test": "node assets/wasm_serv.js & open http://localhost:8080/"
+    "test": "serve-wasm-http & open http://localhost:8080/"
   },
   "devDependencies": {
-    "@polka/send-type": "^0.5.2",
-    "@types/node": "^20.4.8",
-    "body-parser": "^1.20.2",
-    "compress": "^0.99.0",
-    "cors": "^2.8.5",
-    "polka": "^0.5.2",
-    "serve": "^14.2.0",
-    "serve-static": "^1.15.0",
     "typescript": "^5.1.6",
     "typings-tester": "^0.3.2"
   },
@@ -42,6 +34,6 @@
     "url": "https://github.com/sponsors/copious-world"
   },
   "dependencies": {
-    "wasm-base-wrap": "^1.0.3"
+    "wasm-base-wrap": "^1.0.4"
   }
 }
